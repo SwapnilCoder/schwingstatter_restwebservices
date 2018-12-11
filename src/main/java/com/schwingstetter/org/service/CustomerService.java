@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.schwingstetter.org.model.Customer;
 import com.schwingstetter.org.model.Equipment;
@@ -50,11 +51,9 @@ public class CustomerService {
 		customerRepo.findAll()
 		.forEach(customers::add);
 		System.out.println(customers.size());	
-		return customers;
-		
+		return customers;		
 	}
-	
-	
+		
 	/**
 	 * @param customer id
 	 * @return Individual Customer Details
@@ -62,10 +61,8 @@ public class CustomerService {
 	public Customer getById(String id)
 	{
 		System.out.println("Finding for "+id);
-	 return customerRepo.findById(id).get();	
-	 	
-	}
-	
+	 return customerRepo.findById(id).get();		 	
+	}	
 	
 	/**
 	 * @return Add New Customer 
@@ -76,9 +73,6 @@ public class CustomerService {
 	 List<Equipment> prods=new ArrayList<>();
 	 
 	 sites=customer.getSites();
-	 
-	 
-	// sites.add(new Site("S001","Mumbai","XY Road","ContactPerson01","9873526212",prods));
 	 for(Site s:sites)
 	 {
 		 prods=s.getProducts();
@@ -92,4 +86,17 @@ public class CustomerService {
 		return "added";
 	}
 	
+	
+	public String updateCustomerbySite(String id,Site site)
+	{
+		Customer customer=getById(id);
+		
+		List<Site> sites=customer.getSites();
+		siteRepo.save(site);
+		
+		sites.add(site);		
+		customer.setSites(sites);
+		customerRepo.save(customer);
+		return "success";
+	}	
 }

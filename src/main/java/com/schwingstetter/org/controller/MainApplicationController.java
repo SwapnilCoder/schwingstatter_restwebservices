@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,6 +54,13 @@ public class MainApplicationController implements InitializingBean
 	{
 		
 		return customerService.addCustomer(customer);
+	}
+	
+	@PutMapping
+	@RequestMapping("/updateSite/{customerId}")
+	public String updateCustomerbySite(@PathVariable String customerId,@RequestBody Site site)
+	{
+		return customerService.updateCustomerbySite(customerId, site);
 	}
 
 	@Override
