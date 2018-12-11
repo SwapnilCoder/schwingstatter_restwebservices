@@ -52,7 +52,7 @@ public class MainApplicationController implements InitializingBean
 	@RequestMapping("/add")
 	public String addCustomer(@RequestBody Customer customer)
 	{
-		
+		System.out.println();
 		return customerService.addCustomer(customer);
 	}
 	
