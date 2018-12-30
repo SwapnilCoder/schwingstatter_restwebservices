@@ -2,7 +2,9 @@ package com.schwingstetter.org.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +16,6 @@ import com.schwingstetter.org.model.Site;
 import com.schwingstetter.org.repository.CustomerRepository;
 import com.schwingstetter.org.repository.ProductRepository;
 import com.schwingstetter.org.repository.SiteRepository;
-
-
 
 /**
  * @author skadam
@@ -84,6 +84,21 @@ public class CustomerService {
 	 }
 		customerRepo.save(customer);
 		return "added";
+	}
+		
+	public Map<String,String> getAllCustomerNames()
+	{
+		
+		
+		Map<String,String> obj=customerRepo.getAllCustomerNames();
+		/*for(Object n:obj)
+		{
+		String name= n.toString();
+		n.
+		System.out.println(name);
+		names.add(name);
+		}*/
+		return obj;
 	}
 	
 	
